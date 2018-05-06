@@ -1,29 +1,35 @@
 import subprocess
 
-from .message_send import message_send
+from .color import color, yellow
 from .load_computer import load_computer
-from .color import color, green, red, yellow
+from .message_send import message_send
 
-# If massage, check for saved response
+
+# If message, check for saved response
 def message_received(config_path, received, ardevice):
-    print(color(yellow,"Received message. Checking for saved response."))
-    message = received['message']
-    
+    print(color(yellow, "Received message. Checking for saved response."))
+    message = received['message']  # "shell notify-send  -i  ~/Pictures/lock_grey_96x96.png  \"OTP is\""
     computer = load_computer(config_path)
-    
-    option = message.split(" ")
-    if option[0] == "shellcommand":
-        cmd = option[1:]
-        response = "msg "+ardevice+" pythonremoteshellresp=:="+(subprocess.check_output(cmd, universal_newlines=True))
+    # option = message. split(" ")
+    if message.startswith("shell"):
+        cmd = message.replace("shell ", "")
+        if cmd.find("\"") > 0:
+            cmd = cmd.split("  ")
+        else:
+            cmd = cmd.split(" ")
+        res = subprocess.check_output(cmd, universal_newlines=True)
+        if res == "":
+            return;
+        response = "msg " + ardevice + " pythonremoteshellresp=:=" + res
         message_send(config_path, response)
-        print(response)
+        # print(response)
     ####
     # Todo add rules for message received
     ####
-    #fd = open("commands.txt", 'r+')
-    #commands = fd.read().split("\n")
-    #Some code
-    #fd.seek(0)
-    #fd.write(text)
-    #fd.truncate()
-    #fd.close()
+    # fd = open("commands.txt", 'r+')
+    # commands = fd.read().split("\n")
+    # Some code
+    # fd.seek(0)
+    # fd.write(text)
+    # fd.truncate()
+    # fd.close()

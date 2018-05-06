@@ -3,7 +3,7 @@ pythonremote
 
 Python port of Autoremote plugin by João Dias.
 This python script tries to utilize autoremote android app in every platform.
-The script is made to work with python 3.4 and tested on a MacBook Pro Yosemite.
+The script is made to work with python 3.4 and tested on a Ubuntu 18.04.
 
 [AutoApps (joaoapps.com)](http://joaoapps.com/)
 
@@ -11,23 +11,18 @@ The script is made to work with python 3.4 and tested on a MacBook Pro Yosemite.
 
 Requirements
 ------------
-
+These packages already be installed by default.
 The following must be installed via pip3 install:
 - requests
 - urllib
 - http.server
 
-Mac OSX:
-[terminal-notifier](https://github.com/alloy/terminal-notifier).
-```sh
-$ gem install terminal-notifier
-```
 
 Install
 -------
 Clone git repository.
 ```sh
-$ git clone git@github.com:storsnik/pythonremote.git
+$ git cone git@github.com:piyushgarg/pythonremote.git
 ```
 Create symlink to somewhere in your path.
 ```sh
@@ -57,7 +52,7 @@ Response of the shell command well be returned to autoremote device as `shellres
 Yet to come: a way to add own actions for specified messages.
 
 ### Notifications
-Notification support only for Mac OS X, other systems coming soon.
+Notification support only for Ubuntu.
 Notifications are displayed as system notifications and must contain title and text.
 Optional fields: Icon and URL, whereas the specified URL will be opened upon notification click.
 
@@ -82,5 +77,4 @@ What must be improved/fixed/added:
 
 Thanks to
 =========
-
-João Dia for some much needed help with development.
+Petter S. Storvik for the code which actually helped me in improving it.
