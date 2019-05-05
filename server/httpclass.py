@@ -32,18 +32,14 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             ctype, pdict = cgi.parse_header(self.headers.get('content-type'))
             if ctype == 'application/x-www-form-urlencoded' or ctype == 'application/json':
                 length = int(self.headers.get('content-length'))
-                data = cgi.parse_qs(self.rfile.read(length), keep_blank_values=1)
-                # print(data)
+                body = self.rfile.read(length)
+                jsondata = json.loads(body)
+
 
                 # For some reason a http post req results in four requests
                 # Extract one of them
                 print("request")
-                print(data)  # print raw data
-                regex = re.compile("\{b'([^;]+)\':")
-                data = regex.findall(str(data))
-                data = data[0].replace('\\\\', '\\')
-                # data = data.replace('""', '"Null"')  # This to avoid those nasty unicode strings in empty fields
-                jsondata = json.loads(data)
+                print(jsondata)  # print raw data
                 if not isSameRequest(jsondata):
                     ar.request_received(config_path, jsondata)
                 self.send_response(200, {})

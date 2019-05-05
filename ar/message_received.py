@@ -22,14 +22,10 @@ def message_received(config_path, received, ardevice):
             return;
         response = "msg " + ardevice + " pythonremoteshellresp=:=" + res
         message_send(config_path, response)
-        # print(response)
-    ####
-    # Todo add rules for message received
-    ####
-    # fd = open("commands.txt", 'r+')
-    # commands = fd.read().split("\n")
-    # Some code
-    # fd.seek(0)
-    # fd.write(text)
-    # fd.truncate()
-    # fd.close()
+    elif message.startswith("http"):
+        cmd = "xdg-open \"" + message + "\""
+        cmd = cmd.split(" ")
+        print(cmd)
+        subprocess.run(cmd)
+        response = "msg " + ardevice + " urlopenresponse=:=opened"
+        message_send(config_path, response)
