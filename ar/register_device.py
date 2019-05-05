@@ -19,14 +19,13 @@ def register_device(config_path, host_name):
         answr = input(color(yellow, "You want to add a device? [y/n] "))
         if answr in ['y', 'yes', 'Y', 'YES']:
             register_newdevice(config_path, host_name)
-
         else:
             print(color(red, "autoremote is useless with no devices registered. Aborting..."))
             exit(-1)
 
 
 # Register new device
-def register_newdevice(config_path, host_name, name1="None", key1="None", prompt="Yes"):
+def register_newdevice(config_path, host_name, name1=None, key1=None, prompt="Yes"):
     fd = open(config_path + 'autoremotedevices.txt', 'a+')  # Opening device file
     # Todo: Check for existing name or key
     name = name1
@@ -39,7 +38,7 @@ def register_newdevice(config_path, host_name, name1="None", key1="None", prompt
 
     if len(key) > 5:
         key_raw = unshorten_url('https://goo.gl/' + key)
-        if key_raw == key:
+        if key_raw == key or key_raw is "":
             print(color(red, "Could not unshorten URL. Try with regular key if problem continues.."))
             answr = input(color(yellow, "You want to try again? [y/n] "))
         else:

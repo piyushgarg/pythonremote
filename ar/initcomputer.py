@@ -49,7 +49,7 @@ def initcomputer(config_path):
         answr = input(color(yellow, "Do you want to configure this device? [y/n] "))
         if answr in ['y', 'yes', 'Y', 'YES']:
             computer = json.loads(
-                '{"type":"eventghost","port":"1818","haswifi":"True","ttl":"0","collapsekey":"0","additional":{"type":"EventGhost","canreceivefiles":"True","canReceiveNotifications":"True"},"communicattestion_base_params":{"type":"RequestSendRegistration"}}')
+                '{"type":"eventghost","port":"1818","haswifi":"True","ttl":"0","collapsekey":"0","additional":{"type":"EventGhost","canreceivefiles":"True","canReceiveNotifications":"True"},"communication_base_params":{"type":"RequestSendRegistration"}}')
             # Ask for needed parameters
             computer["id"] = "EventGhost"  # input("Id: ")
             computer["name"] = "EventGhost"  # input("Name: ")
