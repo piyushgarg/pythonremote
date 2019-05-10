@@ -14,7 +14,10 @@ def message_received(config_path, received, ardevice):
     if message.startswith("shell"):
         print(message)
         cmd = message.replace("shell ", "")
-        cmd = cmd.split(" ")
+        if cmd.find("\"") > 0:
+            cmd = cmd.split("  ")
+        else:
+            cmd = cmd.split(" ")
         res = subprocess.check_output(cmd, universal_newlines=True)
         if res == "":
             return;
