@@ -12,19 +12,18 @@ def message_received(config_path, received, ardevice):
     computer = load_computer(config_path)
     # option = message. split(" ")
     if message.startswith("shell"):
+        print(message)
         cmd = message.replace("shell ", "")
-        if cmd.find("\"") > 0:
-            cmd = cmd.split("  ")
-        else:
-            cmd = cmd.split(" ")
+        cmd = cmd.split(" ")
         res = subprocess.check_output(cmd, universal_newlines=True)
         if res == "":
             return;
         response = "msg " + ardevice + " pythonremoteshellresp=:=" + res
         message_send(config_path, response)
     elif message.startswith("http"):
-        cmd = "xdg-open \"" + message + "\""
-        cmd = cmd.split(" ")
+        print("url recieved...", message)
+        cmd = ['xdg-open']
+        cmd.append(message)
         print(cmd)
         subprocess.run(cmd)
         response = "msg " + ardevice + " urlopenresponse=:=opened"
